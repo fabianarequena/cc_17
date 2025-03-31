@@ -50,4 +50,26 @@ class SalesRep {
   console.log(`${rep.name}'s Clients:`, rep.clients.map(c => c.name));
   console.log(`Total spent by Fabiana: $${rep.getClientTotal("Fabiana")}`);
 
+
+// Task 3: Extended VIPCustomer Class
+class VIPCustomer extends Customer {
+    constructor(name, email, vipLevel) {
+      super(name, email);
+      this.vipLevel = vipLevel;
+    }
+  
+    // Override to include 10% loyalty bonus
+    getTotalSpent() {
+      const baseTotal = super.getTotalSpent();
+      return baseTotal * 1.10; 
+      // Adds 10% bonus
+    }
+  }
+  
+  // Create a VIP customer
+  const vipCustomer = new VIPCustomer("Nia", "nia@vous.com", "Gold");
+  vipCustomer.addPurchase(300);
+  vipCustomer.addPurchase(250);
+  rep.addClient(vipCustomer);
+  console.log(`${vipCustomer.name} (VIP ${vipCustomer.vipLevel}) Total Spent w/ Bonus: $${vipCustomer.getTotalSpent().toFixed(2)}`);
   
